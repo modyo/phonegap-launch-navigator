@@ -351,20 +351,25 @@ ln.v2 = {};
  * In "maps" mode, transportMode cannot be specified but start location can be specified.
  * {String} transportMode - transportation mode for navigation. Can only be specified if navigationMode == "turn-by-turn". Accepted values are "driving", "walking", "bicycling" or "transit". Defaults to "driving" if not specified.
  */
+
 ln.v2.navigate = function(destination, start, successCallback, errorCallback, options) {
-    options = options ? options : {};
 
-    console.warn("launchnavigator.navigate() called using deprecated v2 API signature. Please update to use v3 API signature as deprecated API support will be removed in a future version");
+  // Set defaults
+  options = options ? options : {};
+  options.preferGoogleMaps = options.preferGoogleMaps ? options.preferGoogleMaps : false;
+  options.enableDebug = options.enableDebug ? options.enableDebug : false;
 
-    // Map to and call v3 API
-    ln.v3.navigate(destination, {
-        successCallback: successCallback,
-        errorCallback: errorCallback,
-        start: start,
-        transportMode: options.transportMode,
-        launchMode: options.navigationMode,
-        enableDebug: options.enableDebug
-    });
+  console.warn("launchnavigator.navigate() called using deprecated v2 API signature. Please update to use v3 API signature as deprecated API support will be removed in a future version");
+
+  // Map to and call v3 API
+  ln.v3.navigate(destination, {
+    successCallback: successCallback,
+    errorCallback: errorCallback,
+    app: common.APP.USER_SELECT, //ABEL PATCH
+    start: start,
+    transportMode: options.transportMode,
+    enableDebug: options.enableDebug
+  });
 };
 
 
