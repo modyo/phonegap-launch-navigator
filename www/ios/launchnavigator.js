@@ -201,22 +201,22 @@ ln.v2 = {};
  */
 ln.v2.navigate = function(destination, start, successCallback, errorCallback, options) {
 
-    // Set defaults
-    options = options ? options : {};
-    options.preferGoogleMaps = options.preferGoogleMaps ? options.preferGoogleMaps : false;
-    options.enableDebug = options.enableDebug ? options.enableDebug : false;
+  // Set defaults
+  options = options ? options : {};
+  options.preferGoogleMaps = options.preferGoogleMaps ? options.preferGoogleMaps : false;
+  options.enableDebug = options.enableDebug ? options.enableDebug : false;
 
-    console.warn("launchnavigator.navigate() called using deprecated v2 API signature. Please update to use v3 API signature as deprecated API support will be removed in a future version");
+  console.warn("launchnavigator.navigate() called using deprecated v2 API signature. Please update to use v3 API signature as deprecated API support will be removed in a future version");
 
-    // Map to and call v3 API
-    ln.v3.navigate(destination, {
-        successCallback: successCallback,
-        errorCallback: errorCallback,
-        app: options.preferGoogleMaps ? common.APP.GOOGLE_MAPS : common.APP.APPLE_MAPS,
-        start: start,
-        transportMode: options.transportMode,
-        enableDebug: options.enableDebug
-    });
+  // Map to and call v3 API
+  ln.v3.navigate(destination, {
+    successCallback: successCallback,
+    errorCallback: errorCallback,
+    app: common.APP.USER_SELECT, //ABEL PATCH
+    start: start,
+    transportMode: options.transportMode,
+    enableDebug: options.enableDebug
+  });
 };
 
 
